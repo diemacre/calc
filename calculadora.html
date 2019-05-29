@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CORE2016 P3</title>
+    <link rel="icon" href="upm.png">
+    <link href="normal.css" rel="stylesheet" type="text/css" media="only screen and (min-width: 530px) and (min-device-width: 481px)">
+    <link href="movil.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)">
+    <script src="JQuery.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var op=" ";
+    var acc=0;
+
+    $(function(){
+
+        $("#pantalla").on("click",function(){
+            $("#pantalla").val("")});//vaciar
+
+        $(document).ready(function () {
+            $("#bateria").val("30")
+        })//bateria inicial
+
+        $(".boton").on("click", function () {
+            var num=$("#bateria");
+            if(num.val()<=0){
+                num.val("bateria gastada");
+            }else{
+                num.val(+num.val()- +3);
+            }
+
+        })//gasto por pulsar en bateria
+
+        $("#suma").on("click",
+                function(){
+                    var num = $("#pantalla");
+                    acc=num.val();
+                    if (isNaN(num.val())){
+                        num.val("Error");
+                        return;
+                    }
+                    if (op === " "){
+                        acc=num.val();
+                    }else {
+                        if(op === "+") acc = +acc + (+num.val());
+                        if(op === "-") acc = +acc - (+num.val());
+                    }
+                    op = "+";
+                });
+        $("#resta").on("click",
+                function(){
+                    var num = $("#pantalla");
+                    if(isNaN(num.val())){
+                        num.val("Error");
+                        return;
+                    }
+                    if (op === " "){
+                        acc=num.val();
+                    }else {
+                        if(op === "+") acc = +acc + (+num.val());
+                        if(op === "-") acc = +acc - (+num.val());
+                    }
+                    op="-";
+                });
+        $("#igual").on("click",
+                function(){
+                    var num = $("#pantalla");
+                    if(isNaN(num.val())){
+                        num.val("Error");
+                        return;
+                    }else {
+                        if(op === "+"){acc = +acc + (+num.val());}
+                        else if(op === "-") {acc = +acc - (+num.val());}
+                        else{ acc=num.val();}
+
+                    }
+                    num.val(acc);
+                    op="";
+                    acc=0;
+                });
+
+        $("#cuadrado").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())) {
+                num.val("Error");
+                return;
+            }else{
+                num.val(num.val()*num.val());
+            }
+        });//cuadrado
+
+        $("#inverso").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())){
+                num.val("Error");
+                return;
+            }else {
+                num.val(1 / num.val());
+            }
+        });//inverso
+
+        $("#raiz").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())){
+                num.val("Error");
+                return;
+            }else if(num.val()<0 ){
+                return num.val("Inserte numero > 0");
+            } else {
+                num.val(Math.sqrt(num.val()));
+            }
+        });//raiz
+
+        $("#potencia2").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())){
+                num.val("Error");
+                return;
+            }else {
+                num.val(Math.pow(2, num.val()));
+            }
+        });//potencia
+
+        $("#pentera").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())){
+                num.val("Error");
+                return;
+            }else {
+                num.val(Math.round(num.val()));
+            }
+        });//parte entera
+
+        $("#factorial").on("click",function(){
+            var num=$("#pantalla");
+            if(isNaN(num.val())){
+                num.val("Error");
+                return;
+            }else if(num.val()/Math.round(num.val())!=1){
+                num.val("Error");
+                return;
+            }else if(num.val()<0){
+                num.val("Error factorial de negativo NE")
+            }else{
+                var total = 1;
+                if (num.val() > -1) {
+                    for (i = 1; i <= num.val(); i++) {
+                        total = total * i;
+                    }
+                    num.val(total);
+                }
+            }
+        });//raiz
+        $("#limpiar").on("click",function(){
+            var num=$("#pantalla");
+            num.val("");
+            acc=0;
+            op="";
+        });//limpiar
+
+    });
+
+</script>
+</head>
+<body>
+    <header> Buenos días bienvenido a la calculadora de Diego (diego.martin.crespo@alumnos.upm.es) </header>
+    <div>
+    Número: <input type="text" size="50" id= "pantalla" >
+    </div>
+<!-- <div modelo="" title="" id="" class=""></div> ejemplo de div
+     <input id="" readonly value="sale en input" name="" type=""> ejemplo de input atributos
+-->
+
+    <p></p>
+    <div id="buttons">
+        <button class="boton" id="suma" > + </button>
+        <button class="boton" id="resta" > - </button>
+        <button class="boton" id="igual" > = </button>
+        <button class="boton" id="cuadrado" >x<sup>2</sup></button>
+        <button class="boton" id="inverso"  >1/x </button>
+        <button class="boton" id="raiz" >sqrt(x)</button>
+        <button class="boton" id="pentera" >parte_entera(x)</button>
+        <button class="boton" id="potencia2" >2<sup>x</sup></button>
+        <button class="boton" id="factorial" >x!</button>
+        <button class="boton" id="limpiar" >Limpiar</button>
+
+    </div>
+    <div>
+        <input id="bateria" readonly> <a>%</a>
+
+    </div>
+
+
+    <p></p>
+    <footer>
+    <div id="nombre">Diego Martin Crespo</div>
+    <div id="correo"> diego.martin.crespo@alumnos.upm.es</div>
+    <div id="hora"><script> document.write(new Date());</script></div>
+    </footer>
+</body>
+</html>
+
